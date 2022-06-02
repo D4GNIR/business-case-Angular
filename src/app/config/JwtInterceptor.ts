@@ -1,5 +1,4 @@
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
-import { nextTick } from "process";
 import {Observable} from "rxjs";
 
 export class JwtInterceptor implements HttpInterceptor{
