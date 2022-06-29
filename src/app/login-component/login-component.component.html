@@ -1,1 +1,25 @@
-<p>login-component works!</p>
+<h2>Welcome On board Captain!</h2>
+<form [formGroup]="userFormGroup">
+  <input [formControlName]="'_email'"
+    [name]="'email'"
+    type="text"
+    class="form-control m-2"
+    placeholder="Email"
+    [class.is-invalid]="email.invalid && email.touched"
+    [class.is-valid]="email.valid && email.touched"
+  >
+  <input [formControlName]="'_password'"
+  [name]="'password'"
+  type="password"
+  class="form-control m-2"
+  placeholder="Password"
+  [class.is-invalid]="password.invalid && password.touched"
+  [class.is-valid]="password.valid && password.touched"
+  >
+
+  <button class="btn btn-primary m-2"
+          [disabled]="userFormGroup.invalid"
+          (click)="onSubmit()">
+    Soumettre
+  </button>
+</form>
