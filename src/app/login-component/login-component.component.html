@@ -1,25 +1,64 @@
-<h2>Welcome On board Captain!</h2>
-<form [formGroup]="userFormGroup">
-  <input [formControlName]="'_email'"
-    [name]="'email'"
-    type="text"
-    class="form-control m-2"
-    placeholder="Email"
-    [class.is-invalid]="email.invalid && email.touched"
-    [class.is-valid]="email.valid && email.touched"
-  >
-  <input [formControlName]="'_password'"
-  [name]="'password'"
-  type="password"
-  class="form-control m-2"
-  placeholder="Password"
-  [class.is-invalid]="password.invalid && password.touched"
-  [class.is-valid]="password.valid && password.touched"
-  >
+<div class="container">
+  <div class="d-flex justify-content-center mt-5">
+    <form [formGroup]="userFormGroup">
+      <div class="col-12 mb-2">
+        <div class="text-center alert-danger" *ngIf="error.length > 0">
+          {{ error }}
+        </div>
+      </div>
+        <div class="row">
+          <div class="col-3">
+            <label class="form-label">E-mail</label>
+          </div>
+          <div class="col-9">
+            <input
+                class="form-control"
+                formControlName="email"
+                [class.is-valid]="getFormControl('email').valid"
+                [class.is-invalid]="isFormControlInvalid('email')"
+              >
+            <div class="alert-danger"
+                 *ngIf="isFormControlInvalid('email')"
+            >
+              <div *ngIf="getFormControl('email').errors?.['email']">
+                Veuillez saisir un e-mail valide
+              </div>
+              <div *ngIf="getFormControl('email').errors?.['required']">
+                Veuillez saisir un e-mail
+              </div>
+            </div>
+          </div>
+        </div>
 
-  <button class="btn btn-primary m-2"
-          [disabled]="userFormGroup.invalid"
-          (click)="onSubmit()">
-    Soumettre
-  </button>
-</form>
+        <div class="row my-2">
+          <div class="col-3">
+            <label class="form-label">Password</label>
+          </div>
+          <div class="col-9">
+            <input
+              class="form-control col-9"
+              formControlName="password"
+              [class.is-valid]="getFormControl('password').valid"
+              [class.is-invalid]="isFormControlInvalid('password')"
+              type="password"
+            >
+            <div class="alert-danger"
+                 *ngIf="isFormControlInvalid('password')"
+            >
+              <div *ngIf="getFormControl('password').errors?.['required']">
+                Veuillez saisir un password
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary mt-2 d-flex mx-auto"
+                type="submit"
+                (click)="onSubmit()"
+                [disabled]="userFormGroup.invalid"
+        >
+          Se connecter
+        </button>
+    </form>
+  </div>
+</div>
